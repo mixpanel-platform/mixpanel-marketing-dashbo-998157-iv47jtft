@@ -40,10 +40,9 @@
   <script type="text/javascript">
   function exportAllData() {
     $("#full-table_wrapper .dt-buttons .buttons-csv").click()
-    alert('i worked')
   }
   </script>
-  <body class="mixpanel-platform-body" style="background-color: white;>
+  <body class="mixpanel-platform-body" style="background-color: white;">
     <div class="container-fluid p-t-2">
       <div class="row flex-items-sm-center">
         <div class="col-sm-12">
@@ -105,7 +104,7 @@
       </div>
     </div>
   </div>
-    <!-- <script type="text/javascript"> // mixpanel tracking
+    <script type="text/javascript"> // mixpanel tracking
     //info for tracking
       var url = window.document.referrer.split('/mpplatform')[0]
       var id = url.split('report/')[1]
@@ -113,8 +112,8 @@
         'event': 'Report Loaded',
         'properties': {
           'token': 'ca9cd5c31c3325af1f911aaaf633ca44',
-          'Report': 'Dashboard',
-          'client': 'WowBox',
+          'Report': 'Spec Sheet',
+          'client': 'internal',
           'distinct_id': id,
           'Project id': id,
           'Local Hour': new Date().getHours(),
@@ -126,7 +125,7 @@
       $.ajax({
         url: "https://api.mixpanel.com/track/?data="+encoded
       })
-    </script> -->
+    </script>
     <!-- graph events table -->
     <script type="text/javascript" src="js/table.js"></script>
     <!-- helper functions -->
