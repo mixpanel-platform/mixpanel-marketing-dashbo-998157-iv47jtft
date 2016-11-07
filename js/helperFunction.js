@@ -70,6 +70,8 @@ function doesNotContain(currentArray, valueToAdd){
     currentArray.push(valueToAdd)
   }
 }
-// function exportAllData() {
-//   $("#full-table_wrapper .dt-buttons .buttons-csv").click()
-// }
+dateSelector.on('change', function(e, dates) {                          // Do something when the dates are changed
+    alert('From: ' + dates.from + '\nTo: ' + dates.to);
+    params.from_date = dates.from
+    params.to_date = dates.to
+});

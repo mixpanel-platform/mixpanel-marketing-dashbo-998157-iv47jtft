@@ -4,8 +4,8 @@ params.default_events = ['$campaign_delivery', '$campaign_marked_spam', '$campai
 
 MP.api.jql(function main() {
   return Events({
-    from_date: new Date(_.now() - (30 * 24 * 60 * 60 * 1000)).toISOString().slice(0, -14),
-    to_date: new Date().toISOString().slice(0, -14)
+    from_date: params.from_date || new Date(_.now() - (30 * 24 * 60 * 60 * 1000)).toISOString().slice(0, -14),
+    to_date: params.to_date || new Date().toISOString().slice(0, -14)
   })
   .filter(event => !_.contains(params.default_events, event.name))
   .map(item => ({
@@ -112,4 +112,5 @@ MP.api.jql(function main() {
     ]
   });
   $('#table-header-row, #export').show()
+  $('#date-picker').show()
 })
