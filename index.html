@@ -4,20 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Marketing Dashboard</title>
+    <title>Project Events and Properties</title>
     <!--mixpanel platform -->
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script> <!--/mixpanel platform -->
 
-    <!-- Latest compiled and minified JavaScript Bootstrap-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified CSS Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <!-- Optional theme Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
     <!-- datables js requirements-->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -28,13 +22,13 @@
     <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap4.min.js"></script>
 
 
     <!-- datatables css -->
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap4.min.css">
 
     <!--font awesome icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -43,14 +37,33 @@
     <link rel="stylesheet" href="css/master-styles.css">
 
   </head>
-
-  <body class="mixpanel-platform-body">
+  <script type="text/javascript">
+  function exportAllData() {
+    $("#full-table_wrapper .dt-buttons .buttons-csv").click()
+    alert('i worked')
+  }
+  </script>
+  <body class="mixpanel-platform-body" style="background-color: white;>
+    <div class="container-fluid p-t-2">
+      <div class="row flex-items-sm-center">
+        <div class="col-sm-12">
+            <h1 class="text-xs-center">Project Events and Properties</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid p-t-2" id="loading-container">
+      <div class="row">
+        <div class="col-sm-12 text-xs-center">
+          <i class="fa fa-spinner" aria-hidden="true" style="font-size:80px"></i>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid p-t-2" id='tables-and-charts'>
       <div class="row" style="margin-top: 25px;">
         <div class="col-sm-12"><!-- start of div for new user table -->
           <table id='event-table' class="table table-striped text-center" cellspacing="0" width="100%">
             <thead>
-              <tr style="background-color: white;">
+              <tr id='table-header-row' style="background-color: white; display:none;">
                 <th>Event</th>
                 <th>Mixpanel Library</th>
                 <th>Event Count</th>
@@ -63,7 +76,7 @@
         <div class="col-sm-12"><!-- start of div products sold by day table -->
           <table id='properties-table' class="table table-striped text-center" cellspacing="0" width="100%">
             <thead>
-              <tr class="text-center"style="background-color: white;">
+              <tr class="text-center" id='table-header-row' style="background-color: white; display:none;">
                 <th>Property Name</th>
                 <th>Percentage Collected</th>
                 <th>Event</th>
@@ -74,16 +87,23 @@
         </div><!-- end of div products sold by day tab-->
       </div> <!-- /end  of div for products sold per month table -->
     </div>
-    <div class="row" style="margin-top: 25px;">
-      <div class="col-sm-12"><!-- start of div products sold by day table -->
-        <table id='full-table' class="table table-striped text-center" cellspacing="0" width="100%">
+    <div class="row" style="margin-top: 25px; display: none;">
+      <div class="col-sm-12" id="full-table-container"><!-- start of div products sold by day table -->
+        <table id='full-table' class="table text-center" cellspacing="0" width="100%">
           <thead>
-            <tr class="text-center"  id="full-table-header-row" style="background-color: white;">
+            <tr class="text-center" id="full-table-header-row" style="background-color: white;">
             </tr>
           <thead>
         </table>
       </div><!-- end of div products sold by day tab-->
     </div> <!-- /end  of div for products sold per month table -->
+  </div>
+  <div class="row" style="margin-top: 25px;">
+    <div class="col-sm-12">
+      <div class="center-block text-xs-center" >
+        <button type="button" id='export' class="mp-button button" name="Export CSV" onclick="exportAllData()" style="display:none;">Export All Data</button>
+      </div>
+    </div>
   </div>
     <!-- <script type="text/javascript"> // mixpanel tracking
     //info for tracking

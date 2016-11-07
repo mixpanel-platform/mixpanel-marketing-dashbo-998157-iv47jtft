@@ -64,6 +64,8 @@ MP.api.jql(function main() {
     }
   }
   addHeaderRow(properties[1])
+  //hide loading icon
+  $("#loading-container").hide()
   //graph events table
   $('#event-table').DataTable( {
     data: eventTableData,
@@ -102,11 +104,12 @@ MP.api.jql(function main() {
     data: properties[0],
     dom: 'Bfrtip',
     lengthMenu: [
-      [ 10, 25, 50, -1 ],
-      [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+      [ -1, 10, 25, 50],
+      [ 'Show all','10 rows', '25 rows', '50 rows']
     ],
     buttons: [
         'csv', 'excel','pageLength'
     ]
   });
+  $('#table-header-row, #export').show()
 })

@@ -23,3 +23,6 @@ a.dt-button, .buttons-html5, div.dt-button, button.dt-button{
   border-radius: 4px;
   background-image: none;
 }
+.paginate_button{
+  padding 0px 0px 0px 0px
+}

@@ -59,7 +59,7 @@ function transformData(data){
   //add in values in case indexes are undefined
   for (var x = 0; x < tableData.length; x++) {
     for(var i= 0; i < headersRow.length; i++){
-      tableData[x][i] = tableData[x][i] || 'N/A'
+      tableData[x][i] = tableData[x][i] || ''
     }
   }
   return [tableData, headersRow]
@@ -70,3 +70,6 @@ function doesNotContain(currentArray, valueToAdd){
     currentArray.push(valueToAdd)
   }
 }
+// function exportAllData() {
+//   $("#full-table_wrapper .dt-buttons .buttons-csv").click()
+// }
